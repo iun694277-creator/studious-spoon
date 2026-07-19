@@ -1,0 +1,53 @@
+[
+  {
+    "id": "DR-MRQSSOME",
+    "createdAt": "2026-07-18T20:07:01.295Z",
+    "source": "product",
+    "event": "add_to_cart",
+    "totalQty": 2,
+    "subtotal": 100,
+    "currency": "SAR",
+    "items": [
+      {
+        "id": "dr-oude-bouquet",
+        "name": "بكج البرجوازي - قطعتيْن مع شحن مجاني",
+        "qty": 2,
+        "price": 50
+      }
+    ]
+  },
+  {
+    "id": "DR-MRQSSSYF",
+    "createdAt": "2026-07-18T20:07:06.903Z",
+    "source": "cart",
+    "event": "order_summary",
+    "totalQty": 2,
+    "subtotal": 100,
+    "currency": "SAR",
+    "items": [
+      {
+        "id": "dr-oude-bouquet",
+        "name": "بكج البرجوازي - قطعتيْن مع شحن مجاني",
+        "qty": 2,
+        "price": 50
+      }
+    ]
+  },
+  {
+    "id": "DR-MRQSSZS3",
+    "createdAt": "2026-07-18T20:07:15.747Z",
+    "source": "cart",
+    "event": "order_summary",
+    "totalQty": 2,
+    "subtotal": 100,
+    "currency": "SAR",
+    "items": [
+      {
+        "id": "dr-oude-bouquet",
+        "name": "بكج البرجوازي - قطعتيْن مع شحن مجاني",
+        "qty": 2,
+        "price": 50
+      }
+    ]
+  }
+]

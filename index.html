@@ -1,0 +1,840 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>دكتور عود - الصفحة الرئيسية</title>
+  <style>
+    :root {
+      --bg: #ffffff;
+      --text: #191919;
+      --muted: #676767;
+      --line: #e7e2dd;
+      --soft: #f7f2ef;
+      --brand: #7f2d2a;
+      --brand-dark: #5f1b18;
+      --gold: #b88a3d;
+      --green: #0a9b58;
+      --shadow: 0 12px 30px rgba(0, 0, 0, .08);
+      --radius: 18px
+    }
+
+    * {
+      box-sizing: border-box
+    }
+
+    html,
+    body {
+      margin: 0;
+      padding: 0;
+      background: #faf7f4;
+      color: var(--text);
+      font-family: Tahoma, Arial, sans-serif
+    }
+
+    body {
+      direction: rtl
+    }
+
+    img {
+      max-width: 100%;
+      display: block
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit
+    }
+
+    .page {
+      max-width: 430px;
+      margin: 0 auto;
+      background: var(--bg);
+      min-height: 100vh
+    }
+
+    .topbar {
+      height: 28px;
+      background: var(--brand);
+      color: #fff;
+      font-size: 11px;
+      display: flex;
+      align-items: center;
+      justify-content: center
+    }
+
+    .header {
+      padding: 12px 14px 10px;
+      background: #fff;
+      box-shadow: 0 1px 0 rgba(0, 0, 0, .04);
+      position: sticky;
+      top: 0;
+      z-index: 10
+    }
+
+    .header-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px
+    }
+
+    .brand img {
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      object-fit: cover
+    }
+
+    .brand strong {
+      display: block;
+      font-size: 12px;
+      line-height: 1.25
+    }
+
+    .brand span {
+      display: block;
+      font-size: 10px;
+      color: var(--muted)
+    }
+
+    .icons {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      color: #7a1f1a;
+      font-size: 21px
+    }
+
+    .search {
+      margin-top: 10px;
+      height: 44px;
+      border-radius: 999px;
+      background: #eff1f4;
+      color: #9a9ea7;
+      display: flex;
+      align-items: center;
+      padding: 0 16px;
+      gap: 12px;
+      font-size: 14px
+    }
+
+    .search .icon {
+      font-size: 18px;
+      opacity: .8
+    }
+
+    .hero {
+      position: relative;
+      margin: 14px 14px 10px;
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: var(--shadow);
+      background: #111;
+      cursor: pointer
+    }
+
+    .hero img {
+      width: 100%;
+      aspect-ratio: 1 / 1.06;
+      object-fit: cover
+    }
+
+    .hero::after {
+      content: "";
+      position: absolute;
+      inset: auto 0 0 0;
+      height: 38%;
+      background: linear-gradient(180deg, rgba(0, 0, 0, 0), rgba(0, 0, 0, .28));
+      pointer-events: none
+    }
+
+    .thumbs {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 8px;
+      padding: 0 14px
+    }
+
+    .thumbs div {
+      border: 1px solid #e8e0d8;
+      border-radius: 10px;
+      overflow: hidden;
+      background: #fff;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, .04);
+      cursor: pointer
+    }
+
+    .thumbs img {
+      width: 100%;
+      aspect-ratio: 1;
+      object-fit: cover
+    }
+
+    .section {
+      padding: 12px 14px 0
+    }
+
+    .title {
+      font-size: 18px;
+      font-weight: 700;
+      line-height: 1.8;
+      margin: 2px 0 6px
+    }
+
+    .rating {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      color: #f0a400;
+      font-size: 13px;
+      margin-bottom: 6px
+    }
+
+    .rating .count {
+      color: #777;
+      font-size: 12px;
+      margin-inline-start: 4px
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      border: 1px dashed #ffb1b1;
+      background: #fff7f7;
+      color: #ba2727;
+      padding: 8px 10px;
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 700;
+      margin-bottom: 12px
+    }
+
+    .pricebox {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: 10px;
+      margin-bottom: 14px
+    }
+
+    .pricebox .label {
+      color: #666;
+      font-size: 12px
+    }
+
+    .pricebox .price {
+      color: #0a9b58;
+      font-weight: 900;
+      font-size: 22px
+    }
+
+    .pricebox .curr {
+      color: #666;
+      font-size: 12px;
+      padding-bottom: 4px
+    }
+
+    .cta-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin: 10px 14px 16px
+    }
+
+    .cta-row a,
+    .cta-row button {
+      height: 46px;
+      border-radius: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 15px;
+      box-shadow: var(--shadow);
+      border: 0;
+      cursor: pointer
+    }
+
+    .cta-buy {
+      background: #ea1111;
+      color: #fff
+    }
+
+    .cta-cart {
+      background: #fff;
+      color: #ea1111;
+      border: 1px solid #f3cccc
+    }
+
+    .cart-badge {
+      position: absolute;
+      top: -6px;
+      left: -6px;
+      min-width: 18px;
+      height: 18px;
+      padding: 0 5px;
+      border-radius: 999px;
+      background: #ea1111;
+      color: #fff;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      font-size: 11px;
+      line-height: 1;
+      box-shadow: 0 0 0 2px #fff;
+    }
+
+    .toast {
+      position: fixed;
+      left: 50%;
+      bottom: 18px;
+      transform: translateX(-50%) translateY(16px);
+      background: #191919;
+      color: #fff;
+      padding: 10px 14px;
+      border-radius: 999px;
+      font-size: 12px;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity .2s ease, transform .2s ease;
+      z-index: 30;
+      box-shadow: var(--shadow);
+    }
+
+    .toast.show {
+      opacity: 1;
+      transform: translateX(-50%) translateY(0);
+    }
+
+    .pill-list {
+      padding: 0 14px;
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap
+    }
+
+    .pill {
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      padding: 8px 10px;
+      background: #fff;
+      color: #444;
+      font-size: 12px
+    }
+
+    .media-card {
+      margin: 16px 14px 0;
+      background: #fff;
+      border: 1px solid #ebe4de;
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: var(--shadow)
+    }
+
+    .media-card img {
+      width: 100%;
+      aspect-ratio: 1.02;
+      object-fit: cover
+    }
+
+    .media-card .caption {
+      padding: 10px 12px 12px;
+      font-size: 12px;
+      color: #555;
+      line-height: 1.8
+    }
+
+    .body-text {
+      padding: 8px 14px 0;
+      line-height: 2.05;
+      font-size: 14px;
+      color: #242424
+    }
+
+    .body-text p {
+      margin: 0 0 12px
+    }
+
+    .highlight {
+      border: 1px solid #fde2a6;
+      background: #fffdf6;
+      border-radius: 14px;
+      padding: 12px;
+      color: #6f4a00;
+      margin: 8px 14px 0;
+      line-height: 1.95;
+      font-size: 13px
+    }
+
+    .section-title {
+      padding: 18px 14px 10px;
+      font-size: 18px;
+      font-weight: 800
+    }
+
+    .payment-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 8px;
+      padding: 0 14px
+    }
+
+    .payment-grid .item {
+      background: #fff;
+      border: 1px solid #ebe6e0;
+      border-radius: 12px;
+      min-height: 58px;
+      display: grid;
+      place-items: center;
+      padding: 8px;
+      box-shadow: var(--shadow)
+    }
+
+    .payment-grid img {
+      max-height: 24px;
+      object-fit: contain
+    }
+
+    .rating-card {
+      margin: 0 14px;
+      background: #fff;
+      border: 1px solid #ebe4de;
+      border-radius: 16px;
+      box-shadow: var(--shadow);
+      padding: 14px
+    }
+
+    .rating-head {
+      display: flex;
+      justify-content: space-between;
+      gap: 10px;
+      align-items: center
+    }
+
+    .bars {
+      margin-top: 12px;
+      display: grid;
+      gap: 8px
+    }
+
+    .bar {
+      height: 8px;
+      background: #f0ece8;
+      border-radius: 999px;
+      overflow: hidden
+    }
+
+    .bar span {
+      display: block;
+      height: 100%;
+      background: #efb03a
+    }
+
+    .review {
+      display: grid;
+      grid-template-columns: 34px 1fr;
+      gap: 10px;
+      align-items: start;
+      margin-top: 14px;
+      padding-top: 14px;
+      border-top: 1px solid #f0ece8
+    }
+
+    .review img {
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      object-fit: cover
+    }
+
+    .review h4 {
+      margin: 0 0 4px;
+      font-size: 13px
+    }
+
+    .review p {
+      margin: 0;
+      font-size: 12px;
+      line-height: 1.9;
+      color: #444
+    }
+
+    .faq {
+      margin: 12px 14px 0;
+      display: grid;
+      gap: 10px
+    }
+
+    .faq details {
+      border: 1px solid #ebe4de;
+      border-radius: 14px;
+      background: #fff;
+      box-shadow: var(--shadow);
+      padding: 10px 12px
+    }
+
+    .faq summary {
+      cursor: pointer;
+      font-weight: 700;
+      font-size: 13px;
+      line-height: 1.7
+    }
+
+    .faq p {
+      margin: 10px 0 0;
+      color: #555;
+      font-size: 12px;
+      line-height: 1.95
+    }
+
+    .related {
+      padding: 4px 14px 0;
+      display: grid;
+      gap: 12px
+    }
+
+    .related figure {
+      margin: 0;
+      background: #fff;
+      border: 1px solid #ebe4de;
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: var(--shadow)
+    }
+
+    .related img {
+      width: 100%;
+      aspect-ratio: 1/1;
+      object-fit: cover
+    }
+
+    .related figcaption {
+      padding: 10px 12px 12px;
+      font-size: 12px;
+      color: #5d5d5d;
+      line-height: 1.75
+    }
+
+    .footer {
+      margin-top: 24px;
+      background: #1f1513;
+      color: #efe7e4;
+      padding: 22px 14px 18px
+    }
+
+    .footer .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 12px
+    }
+
+    .footer .logo img {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      object-fit: cover
+    }
+
+    .footer .logo strong {
+      display: block;
+      font-size: 15px
+    }
+
+    .footer .logo span {
+      display: block;
+      font-size: 11px;
+      color: #cdbeb8
+    }
+
+    .footer .links {
+      color: #d9c9c3;
+      font-size: 12px;
+      line-height: 2;
+      margin-top: 10px
+    }
+
+    .footer .social {
+      display: flex;
+      gap: 8px;
+      margin-top: 14px;
+      flex-wrap: wrap
+    }
+
+    .footer .social span {
+      border: 1px solid rgba(255, 255, 255, .15);
+      border-radius: 999px;
+      padding: 7px 10px;
+      font-size: 11px
+    }
+
+    .copy {
+      margin-top: 16px;
+      color: #9a8882;
+      font-size: 11px
+    }
+
+    @media (max-width:380px) {
+      .title {
+        font-size: 17px
+      }
+
+      .payment-grid {
+        grid-template-columns: repeat(3, 1fr)
+      }
+
+      .cta-row {
+        grid-template-columns: 1fr
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <main class="page">
+    <div class="topbar">شحن مجاني لجميع أنحاء المملكة</div>
+    <header class="header">
+      <div class="header-row">
+        <div class="brand">
+          <img src="img/dr-oude-logo.png" alt="دكتور عود" />
+          <div>
+            <strong>دكتور عود</strong>
+            <span>منتجات فاخرة برائحة ثابتة</span>
+          </div>
+        </div>
+        <div class="icons" aria-hidden="true"><span>☰</span><span>👤</span><a href="cart.html"
+            style="position:relative;display:inline-flex;align-items:center;justify-content:center"><span>🛒</span><span
+              id="cartBadge" class="cart-badge">0</span></a></div>
+      </div>
+      <div class="search"><span class="icon">🔍</span><span>ادخل كلمة البحث</span></div>
+    </header>
+    <section class="hero" data-add-package="1"><img src="img/dr-oude-motion.png" alt="صورة المنتج الرئيسية" /></section>
+    <div class="thumbs" aria-label="صور مصغرة للمنتج">
+      <div data-add-package="1"><img src="img/dr-oude-pack.jpg" alt="صورة 1" /></div>
+      <div data-add-package="1"><img src="img/dr-oude-boxes.png" alt="صورة 2" /></div>
+      <div data-add-package="1"><img src="img/dr-oude-card.png" alt="صورة 3" /></div>
+      <div data-add-package="1"><img src="img/dr-oude-double.png" alt="صورة 4" /></div>
+      <div data-add-package="1"><img src="img/dr-oude-paynote.jpg" alt="صورة 5" /></div>
+    </div>
+    <section class="section">
+      <h1 class="title">بكج البرجوازي - قطعتيْن مع شحن مجاني</h1>
+      <div class="rating">★★★★★ <span class="count">(123 تقييم)</span></div>
+      <div class="badge">عرض محدود لمدة 24 ساعة | توفير خاص</div>
+      <div class="pricebox">
+        <div>
+          <div class="label">السعر</div>
+          <div class="price">50</div>
+        </div>
+        <div class="curr">ر.س</div>
+      </div>
+    </section>
+    <div class="cta-row"><a class="cta-buy" href="cart.html">اشتري الآن</a><button class="cta-cart"
+        id="addToCartBtn" type="button">أضف إلى السلة</button></div>
+    <div class="pill-list"><span class="pill">الدفع عند الاستلام متاح</span><span class="pill">شحن مجاني</span><span
+        class="pill">إرجاع مرن</span></div>
+    <section class="media-card" data-add-package="1"><img src="img/dr-oude-pack.jpg" alt="صورة إضافية للمنتج" />
+      <div class="caption">عرض فاخر للبكج مع تفاصيل واضحة وتغليف هدية أنيق.</div>
+    </section>
+    <section class="body-text" id="details">
+      <p>مو مجرد صابونة.. هذا طقم فاخر برائحة رجولية ثابتة، يعطي حضور واضح ويترك أثر نظيف وراقي.</p>
+      <p>التركيبة مصممة لتناسب الاستخدام الشخصي والهدايا، مع تغليف يعطيك نفس الإحساس الظاهر في صورة المرجع.</p>
+      <p>الهدف هنا بسيط: نفس الإحساس، نفس الترتيب، ونفس لغة العرض البصرية التي تبدأ بصورة قوية ثم تنزل إلى تفاصيل
+        المنتج.</p>
+    </section>
+    <div class="highlight"><strong>تنبيه:</strong> هذا المنتج موجه للرجل، مناسب للاستخدام اليومي، ويأتي مع عرض شحن مجاني
+      وواجهة شراء سريعة.</div>
+    <div class="section-title">وسائل الدفع</div>
+    <div class="payment-grid">
+      <div class="item"><img
+          src="C:/Users/user/OneDrive/الصور/بكج صابون البرجوازي الثنائي (قطعتين) مع شحن مجاني _ دكتور عود - Dr.oude_files/mada_mini.png"
+          alt="مدى" /></div>
+      <div class="item"><img src="static/img/credit_card_mini.png" alt="بطاقة" /></div>
+      <div class="item"><img src="static/img/tabby_installment_mini.png" alt="تابي" /></div>
+      <div class="item"><img src="static/img/stc_pay_mini.png" alt="STC Pay" /></div>
+      <div class="item"><img src="static/img/commercial-register.png" alt="سجل تجاري" /></div>
+      <div class="item"><img src="img/mastercard.2e0df4b3.png" alt="Mastercard" /></div>
+      <div class="item"><img src="img/american-express.f13e693f.png" alt="American Express" /></div>
+      <div class="item"><img src="img/visa 2.5bc8a4f4.png" alt="VISA" /></div>
+    </div>
+    <div class="section-title">التقييمات</div>
+    <div class="rating-card">
+      <div class="rating-head">
+        <div><strong>4.5</strong> / 5</div>
+        <div style="color:#f0a400">★★★★★</div>
+      </div>
+      <div class="bars">
+        <div class="bar"><span style="width:86%"></span></div>
+        <div class="bar"><span style="width:68%"></span></div>
+        <div class="bar"><span style="width:42%"></span></div>
+        <div class="bar"><span style="width:18%"></span></div>
+        <div class="bar"><span style="width:8%"></span></div>
+      </div>
+      <div class="review"><img src="static/img/dr-oude-avatar.png" alt="مراجع" />
+        <div>
+          <h4>محمد</h4>
+          <p>التغليف مرتب جدًا والرائحة ثابتة. الصورة على الموقع تشبه المنتج فعليًا بشكل كبير.</p>
+        </div>
+      </div>
+      <div class="review"><img src="static/img/dr-oude-avatar.png" alt="مراجع" />
+        <div>
+          <h4>سلمان</h4>
+          <p>وصول سريع وتجربة شراء بسيطة. التصميم واضح ومشابه تمامًا لعرض المنتج المطلوب.</p>
+        </div>
+      </div>
+      <div class="review"><img src="static/img/dr-oude-avatar.png" alt="مراجع" />
+        <div>
+          <h4>عبدالله</h4>
+          <p>المنتج مناسب كهدية، والصفحة تعطي انطباع فاخر ومنظم مثل الصورة المرجعية.</p>
+        </div>
+      </div>
+    </div>
+    <div class="section-title">أسئلة شائعة</div>
+    <div class="faq">
+      <details>
+        <summary>هل يوجد شحن مجاني؟</summary>
+        <p>نعم، تم إبراز الشحن المجاني في أعلى الصفحة وفي الرسائل التعريفية مثل المرجع.</p>
+      </details>
+      <details>
+        <summary>هل الصفحة مناسبة للجوال؟</summary>
+        <p>نعم، البنية كاملة مضبوطة على عرض هاتف ضيق مع بطاقات متجاوبة وارتفاعات مضبوطة.</p>
+      </details>
+      <details>
+        <summary>هل يمكن الانتقال لصفحة الشراء؟</summary>
+        <p>زر "اشتري الآن" يفتح صفحة التفاصيل نفسها حاليًا ويمكن ربطه لاحقًا بخطوة الدفع الحقيقية.</p>
+      </details>
+    </div>
+    <div class="section-title">صور إضافية</div>
+    <section class="related">
+      <figure data-add-package="1"><img src="img/dr-oude-double.png" alt="صورة المنتج" />
+        <figcaption>عرض ثنائي فاخر يوضح شكل البكج عند التقديم.</figcaption>
+      </figure>
+      <figure data-add-package="1"><img src="img/dr-oude-motion.png" alt="صورة الرجل مع المنتج" />
+        <figcaption>لقطة أسلوبية تشبه إحساس الصورة المرجعية في الأسفل.</figcaption>
+      </figure>
+    </section>
+    <footer class="footer">
+      <div class="logo"><img src="img/dr-oude-logo.png" alt="دكتور عود" />
+        <div><strong>دكتور عود</strong><span>منتجات مختارة بعناية</span></div>
+      </div>
+      <div class="links">دعم الطلبات · سياسة الاسترجاع · الشروط والأحكام<br />تواصل معنا · واتساب · إنستغرام · إكس</div>
+      <div class="social"><span>واتساب</span><span>إنستغرام</span><span>X</span><span>يوتيوب</span></div>
+      <div class="copy">© جميع الحقوق محفوظة</div>
+    </footer>
+  </main>
+  <div class="toast" id="toast">تمت إضافة المنتج إلى السلة</div>
+  <script src="static/js/jquery-3.5.1.js"></script>
+  <script>
+    window.ORDER_WEBHOOK_URL = 'http://127.0.0.1:3001/orders';
+    (function () {
+      const cartKey = 'droude_cart';
+      const toast = document.getElementById('toast');
+      const cartBadge = document.getElementById('cartBadge');
+      const addBtn = document.getElementById('addToCartBtn');
+      const packageTargets = document.querySelectorAll('[data-add-package="1"]');
+      const packageItem = {
+        id: 'dr-oude-bouquet',
+        name: 'بكج البرجوازي - قطعتيْن مع شحن مجاني',
+        price: 50,
+        currency: 'ر.س',
+        qty: 1,
+      };
+
+      function readCart() {
+        try {
+          return JSON.parse(localStorage.getItem(cartKey) || '[]');
+        } catch (e) {
+          return [];
+        }
+      }
+
+      function writeCart(items) {
+        localStorage.setItem(cartKey, JSON.stringify(items));
+        if (cartBadge) {
+          const totalQty = items.reduce((sum, item) => sum + (Number(item.qty) || 1), 0);
+          cartBadge.textContent = String(totalQty);
+          cartBadge.style.display = totalQty ? 'inline-flex' : 'none';
+        }
+      }
+
+      function showToast(message) {
+        if (!toast) return;
+        toast.textContent = message;
+        toast.classList.add('show');
+        window.clearTimeout(window.__toastTimer);
+        window.__toastTimer = window.setTimeout(() => {
+          toast.classList.remove('show');
+        }, 1600);
+      }
+
+      async function sendSafeProductNotice(cart) {
+        const orderWebhookUrl = window.ORDER_WEBHOOK_URL || '';
+        if (!orderWebhookUrl) return true;
+        const totalQty = cart.reduce((sum, item) => sum + (Number(item.qty) || 1), 0);
+        const subtotal = cart.reduce((sum, item) => sum + ((Number(item.price) || 0) * (Number(item.qty) || 1)), 0);
+        const response = await fetch(orderWebhookUrl, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            source: 'product',
+            event: 'add_to_cart',
+            orderId: 'DR-' + Date.now().toString(36).toUpperCase(),
+            totalQty,
+            subtotal,
+            currency: 'SAR',
+            items: cart.map((item) => ({
+              id: item.id,
+              name: item.name,
+              qty: Number(item.qty) || 1,
+              price: Number(item.price) || 0,
+            })),
+          }),
+        });
+        return response.ok;
+      }
+
+      function addPackageToCart() {
+        const cart = readCart();
+        const existingItem = cart.find((item) => item.id === packageItem.id);
+        if (existingItem) {
+          existingItem.qty = (Number(existingItem.qty) || 1) + 1;
+        } else {
+          cart.push({ ...packageItem });
+        }
+        writeCart(cart);
+        showToast('تمت إضافة الباكيج إلى السلة');
+        sendSafeProductNotice(cart)
+          .catch(() => false)
+          .finally(() => {
+            window.setTimeout(() => {
+              window.location.href = 'cart.html';
+            }, 350);
+          });
+      }
+
+      const existing = readCart();
+      writeCart(existing);
+
+      if (addBtn) {
+        addBtn.addEventListener('click', () => {
+          addPackageToCart();
+        });
+      }
+
+      packageTargets.forEach((target) => {
+        target.addEventListener('click', addPackageToCart);
+      });
+    })();
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,204 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>عنوان الشحن - droude.sa</title>
+    <style>
+      :root{
+        --bg:#f6f6f7;
+        --panel:#ffffff;
+        --soft:#eef0f3;
+        --line:#e5e5ea;
+        --brand:#7d6677;
+        --brand-dark:#7f2c29;
+        --text:#151521;
+        --muted:#90909a;
+        --shadow:0 10px 28px rgba(0,0,0,.08);
+      }
+      *{box-sizing:border-box}
+      html,body{margin:0;min-height:100%;background:var(--bg);font-family:Tahoma,Arial,sans-serif;color:var(--text)}
+      body{direction:rtl}
+      a{text-decoration:none;color:inherit}
+      button,input,select,textarea{font:inherit}
+      .page{max-width:430px;margin:0 auto;min-height:100vh;background:linear-gradient(180deg,#fbfbfb 0%,#f4f4f6 100%)}
+      .announce{height:60px;background:var(--brand);color:#d9d3d7;display:flex;align-items:center;justify-content:center;gap:12px;font-size:18px;font-weight:700}
+      .announce .icon{opacity:.65;font-size:21px}
+      .search-wrap{padding:14px 14px 6px}
+      .search{height:50px;border-radius:999px;background:#f0f2f5;color:#a1a3ac;display:flex;align-items:center;padding:0 18px;font-size:16px;box-shadow:inset 0 1px 0 rgba(255,255,255,.7)}
+      .search .icon{font-size:18px;margin-inline-start:8px}
+      .top-actions{display:flex;justify-content:space-between;align-items:center;padding:14px 14px 18px}
+      .left-actions{display:flex;align-items:center;gap:14px}
+      .currency{font-size:25px;font-weight:900;color:#151515}
+      .circle{width:62px;height:62px;border-radius:50%;background:#fff;border:1px solid #e6e7ed;display:grid;place-items:center;box-shadow:var(--shadow);color:#283042;font-size:28px;position:relative}
+      .bag::after{content:"";position:absolute;top:-1px;right:-1px;width:18px;height:18px;border-radius:50%;background:#be0916;box-shadow:0 0 0 4px #fff}
+      .logo-badge{width:66px;height:66px;border-radius:50%;background:#fff;border:1px solid #ece8e8;display:grid;place-items:center;overflow:hidden;box-shadow:var(--shadow)}
+      .logo-badge img{width:100%;height:100%;object-fit:cover}
+      .menu{font-size:38px;color:#7f2c29;line-height:1}
+      .crumbs{padding:10px 16px 0;color:#9c9ca6;font-size:18px;line-height:1.8;opacity:.45;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+      .sheet{margin-top:16px;background:#fff;border-radius:24px 24px 0 0;box-shadow:0 -10px 25px rgba(0,0,0,.08);min-height:calc(100vh - 270px);padding:18px 18px 24px}
+      .sheet-head{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:18px}
+      .close{width:36px;height:36px;border:0;background:transparent;color:#f16a6a;font-size:34px;line-height:1;padding:0}
+      .profile{width:68px;height:68px;border-radius:50%;border:1px solid #e6e7ed;display:grid;place-items:center;overflow:hidden;background:#fff;flex:0 0 auto}
+      .profile img{width:100%;height:100%;object-fit:cover;display:block}
+      .title{display:flex;align-items:center;gap:12px}
+      h1{margin:0;font-size:24px;font-weight:900;color:#141428}
+      .field{margin-top:14px}
+      .label{margin:0 0 8px;font-size:18px;color:#252535;font-weight:700}
+      .req{color:#e03535}
+      .input,.select,.textarea{
+        width:100%;
+        border:1px solid #e4e4e8;
+        border-radius:12px;
+        background:#fff;
+        height:56px;
+        padding:0 16px;
+        color:#30303c;
+        outline:none;
+        box-shadow:inset 0 1px 0 rgba(255,255,255,.6);
+      }
+      .input::placeholder,.textarea::placeholder,.select{color:#a5a5ad}
+      .select{
+        appearance:none;
+        background-image:linear-gradient(45deg,transparent 50%,#8e8f98 50%),linear-gradient(135deg,#8e8f98 50%,transparent 50%);
+        background-position:calc(100% - 18px) 23px,calc(100% - 12px) 23px;
+        background-size:6px 6px,6px 6px;
+        background-repeat:no-repeat;
+        padding-inline-end:38px;
+      }
+      .textarea{height:72px;resize:none;padding-top:14px}
+      .btn{
+        width:100%;
+        height:54px;
+        border:0;
+        border-radius:8px;
+        font-size:18px;
+        font-weight:800;
+        margin-top:18px;
+        cursor:pointer;
+      }
+      .btn.primary{background:#8f1e24;color:#fff}
+      .btn.secondary{background:#fff;color:#8f1e24;border:2px solid #8f1e24}
+      .hint{margin-top:14px;font-size:12px;color:#8e8f98;line-height:1.8;text-align:center}
+      .bottom-actions{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:18px}
+      .pill{height:54px;border-radius:16px;display:flex;align-items:center;justify-content:center;font-size:17px;font-weight:800;color:#fff;box-shadow:var(--shadow)}
+      .pill.buy{background:#e41414}
+      .pill.cart{background:#f31313}
+      @media (max-width:390px){
+        .announce{font-size:15px}
+        .crumbs{font-size:16px}
+        .bottom-actions{grid-template-columns:1fr}
+      }
+    </style>
+  </head>
+  <body>
+    <main class="page">
+      <div class="announce"><span class="icon">×</span><span>شحن مجاني لجميع أنحاء المملكة</span><span class="icon">🔔</span></div>
+      <div class="search-wrap">
+        <div class="search"><span>ادخل كلمة البحث</span><span class="icon">🔍</span></div>
+      </div>
+      <div class="top-actions">
+        <div class="left-actions">
+          <div class="currency">﷼</div>
+          <div class="circle bag">🛍</div>
+          <div class="circle">◉</div>
+        </div>
+        <div style="display:flex;align-items:center;gap:10px">
+          <div class="logo-badge"><img src="img/dr-oude-logo.png" alt="دكتور عود" /></div>
+          <div class="menu">☰</div>
+        </div>
+      </div>
+      <div class="crumbs">الرئيسية  ‹  دكتور عود  ‹  عنوان الشحن</div>
+      <section class="sheet">
+        <div class="sheet-head">
+          <button class="close" type="button" aria-label="إغلاق">×</button>
+          <div class="title">
+            <div class="profile"><img src="C:/Users/user/OneDrive/الصور/بكج صابون البرجوازي الثنائي (قطعتين) مع شحن مجاني _ دكتور عود - Dr.oude_files/hZoMKbfRo3OnkyOhBrT2MxrRs2yZVf30wpu7djeS.png" alt="دكتور عود" /></div>
+            <h1>العنوان</h1>
+          </div>
+        </div>
+
+        <div class="field">
+          <div class="label">اختر الدولة <span class="req">*</span></div>
+          <select class="select">
+            <option selected>السعودية</option>
+            <option>الكويت</option>
+            <option>الإمارات</option>
+            <option>قطر</option>
+            <option>البحرين</option>
+            <option>عُمان</option>
+          </select>
+        </div>
+
+        <div class="field">
+          <div class="label">اختر المدينة <span class="req">*</span></div>
+          <select class="select">
+            <option selected>اختر المدينة</option>
+            <option>الرياض</option>
+            <option>جدة</option>
+            <option>الدمام</option>
+            <option>الخبر</option>
+            <option>حائل</option>
+            <option>مكة المكرمة</option>
+            <option>المدينة المنورة</option>
+            <option>الطائف</option>
+            <option>أبها</option>
+            <option>تبوك</option>
+            <option>القصيم</option>
+            <option>الجبيل</option>
+            <option>نجران</option>
+            <option>جيزان</option>
+          </select>
+        </div>
+
+        <div class="field">
+          <div class="label">الاسم الأول <span class="req">*</span></div>
+          <input class="input" type="text" placeholder="أدخل الاسم الأول" />
+        </div>
+
+        <div class="field">
+          <div class="label">الاسم الأخير <span class="req">*</span></div>
+          <input class="input" type="text" placeholder="أدخل الاسم الأخير" />
+        </div>
+
+        <div class="field">
+          <div class="label">الحي</div>
+          <input class="input" type="text" placeholder="الحي" />
+        </div>
+
+        <div class="field">
+          <div class="label">الشارع <span class="req">*</span></div>
+          <input class="input" type="text" placeholder="أدخل اسم الشارع" />
+        </div>
+
+        <div class="field">
+          <div class="label">وصف البيت</div>
+          <textarea class="textarea" placeholder="اكتب وصفًا للبيت"></textarea>
+        </div>
+
+        <button class="btn primary" id="saveBtn" type="button">حفظ العنوان</button>
+        <button class="btn secondary" type="button" onclick="window.location.href='cart.html'">رجوع</button>
+
+        <div class="bottom-actions">
+          <a class="pill buy" href="payment-step.html">اشتر الآن</a>
+          <a class="pill cart" href="cart.html" aria-label="السلة">🛒</a>
+        </div>
+
+        <div class="hint">يمكنك اختيار أي مدينة داخل السعودية مثل الرياض أو جدة أو حائل، ثم حفظ العنوان للمتابعة.</div>
+      </section>
+    </main>
+    <script src="static/js/jquery-3.5.1.js"></script>
+    <script>
+      (function(){
+        const closeBtn = document.querySelector('.close');
+        const saveBtn = document.getElementById('saveBtn');
+        if(closeBtn){
+          closeBtn.addEventListener('click',()=>window.location.href='cart.html');
+        }
+        if(saveBtn){
+          saveBtn.addEventListener('click',()=>window.location.href='payment-step.html');
+        }
+      })();
+    </script>
+  </body>
+  </html>

@@ -1,0 +1,197 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>السلة - دكتور عود</title>
+    <style>
+      :root{--bg:#faf7f4;--text:#191919;--muted:#676767;--line:#e7e2dd;--brand:#7f2d2a;--shadow:0 12px 30px rgba(0,0,0,.08)}
+      *{box-sizing:border-box}
+      html,body{margin:0;padding:0;background:var(--bg);color:var(--text);font-family:Tahoma,Arial,sans-serif}
+      body{direction:rtl}
+      a{text-decoration:none;color:inherit}
+      .page{max-width:430px;margin:0 auto;min-height:100vh;background:#fff}
+      .header{padding:14px;background:#fff;position:sticky;top:0;z-index:10;box-shadow:0 1px 0 rgba(0,0,0,.04)}
+      .header h1{margin:0;font-size:18px}
+      .header p{margin:4px 0 0;color:var(--muted);font-size:12px}
+      .content{padding:14px}
+      .empty,.item{background:#fff;border:1px solid #ebe4de;border-radius:16px;box-shadow:var(--shadow)}
+      .empty{padding:24px;text-align:center;color:var(--muted);line-height:1.9}
+      .item{padding:14px;margin-bottom:10px}
+      .row{display:flex;justify-content:space-between;gap:12px;align-items:flex-start}
+      .name{font-weight:700;line-height:1.8}
+      .meta{color:var(--muted);font-size:12px;margin-top:6px}
+      .qty{display:flex;align-items:center;gap:8px;margin-top:12px}
+      .qty button{width:30px;height:30px;border-radius:10px;border:1px solid var(--line);background:#fff;cursor:pointer}
+      .price{font-weight:900;color:#0a9b58;white-space:nowrap}
+      .summary{margin-top:14px;padding:14px;border-radius:16px;background:#1f1513;color:#efe7e4}
+      .summary .line{display:flex;justify-content:space-between;gap:10px;font-size:13px;line-height:1.9}
+      .summary .total{margin-top:10px;padding-top:10px;border-top:1px solid rgba(255,255,255,.12);font-size:16px;font-weight:800}
+      .actions{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:12px}
+      .actions a,.actions button{height:46px;border:0;border-radius:14px;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:15px;box-shadow:var(--shadow);cursor:pointer}
+      .checkout{background:#ea1111;color:#fff}
+      .back{background:#fff;border:1px solid #f3cccc;color:#ea1111}
+      .status{
+        margin-top:10px;
+        min-height:18px;
+        text-align:center;
+        color:#8b6a00;
+        font-size:12px;
+        line-height:1.6;
+      }
+      .footer-note{margin-top:12px;color:var(--muted);font-size:12px;line-height:1.8;text-align:center}
+    </style>
+  </head>
+  <body>
+    <main class="page">
+      <div class="header">
+        <h1>سلة المشتريات</h1>
+        <p>تُحفظ المنتجات هنا مع الكمية والإجمالي.</p>
+      </div>
+      <div class="content">
+        <div id="cartList"></div>
+        <div id="emptyState" class="empty" style="display:none">السلة فارغة حالياً. يمكنك العودة للمنتج وإضافة ما تريد.</div>
+        <div class="summary">
+          <div class="line"><span>إجمالي القطع</span><span id="totalQty">0</span></div>
+          <div class="line"><span>الإجمالي الفرعي</span><span id="subtotal">0 ر.س</span></div>
+          <div class="line total"><span>الإجمالي</span><span id="grandTotal">0 ر.س</span></div>
+        </div>
+        <div class="actions">
+          <button class="checkout" id="checkoutBtn" type="button">إكمال الشراء</button>
+          <a class="back" href="index.html">متابعة التسوق</a>
+        </div>
+        <div class="status" id="statusText"></div>
+        <div class="footer-note">يمكنك زيادة الكمية من هنا بدون تكرار نفس المنتج أكثر من مرة.</div>
+      </div>
+    </main>
+    <script src="static/js/jquery-3.5.1.js"></script>
+    <script>
+      window.ORDER_WEBHOOK_URL = 'http://127.0.0.1:3001/orders';
+      (function () {
+        const cartKey = 'droude_cart';
+        const orderWebhookUrl = window.ORDER_WEBHOOK_URL || '';
+        const cartList = document.getElementById('cartList');
+        const emptyState = document.getElementById('emptyState');
+        const totalQtyEl = document.getElementById('totalQty');
+        const subtotalEl = document.getElementById('subtotal');
+        const grandTotalEl = document.getElementById('grandTotal');
+        const checkoutBtn = document.getElementById('checkoutBtn');
+        const statusText = document.getElementById('statusText');
+
+        function readCart() {
+          try {
+            return JSON.parse(localStorage.getItem(cartKey) || '[]');
+          } catch (e) {
+            return [];
+          }
+        }
+
+        function writeCart(items) {
+          localStorage.setItem(cartKey, JSON.stringify(items));
+          render();
+        }
+
+        function buildSafeOrderPayload(cart) {
+          const totalQty = cart.reduce((sum, item) => sum + (Number(item.qty) || 1), 0);
+          const subtotal = cart.reduce((sum, item) => sum + ((Number(item.price) || 0) * (Number(item.qty) || 1)), 0);
+          return {
+            source: 'cart',
+            totalQty,
+            subtotal,
+            currency: 'SAR',
+            items: cart.map((item) => ({
+              id: item.id,
+              name: item.name,
+              qty: Number(item.qty) || 1,
+              price: Number(item.price) || 0,
+            })),
+          };
+        }
+
+        async function sendSafeOrderSummary() {
+          const cart = readCart();
+          if (!cart.length || !orderWebhookUrl) return true;
+          const response = await fetch(orderWebhookUrl, {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(buildSafeOrderPayload(cart)),
+          });
+          return response.ok;
+        }
+
+        function render() {
+          const cart = readCart();
+          cartList.innerHTML = '';
+          const totalQty = cart.reduce((sum, item) => sum + (Number(item.qty) || 1), 0);
+          const subtotal = cart.reduce((sum, item) => sum + ((Number(item.price) || 0) * (Number(item.qty) || 1)), 0);
+          totalQtyEl.textContent = String(totalQty);
+          subtotalEl.textContent = `${subtotal} ر.س`;
+          grandTotalEl.textContent = `${subtotal} ر.س`;
+          emptyState.style.display = cart.length ? 'none' : 'block';
+          checkoutBtn.disabled = !cart.length;
+          checkoutBtn.style.opacity = cart.length ? '1' : '.55';
+          checkoutBtn.style.cursor = cart.length ? 'pointer' : 'not-allowed';
+
+          cart.forEach((item, index) => {
+            const card = document.createElement('div');
+            card.className = 'item';
+            card.innerHTML = `
+              <div class="row">
+                <div>
+                  <div class="name">${item.name}</div>
+                  <div class="meta">المنتج رقم ${index + 1}</div>
+                  <div class="qty">
+                    <button type="button" data-action="dec" data-index="${index}">-</button>
+                    <strong>${Number(item.qty) || 1}</strong>
+                    <button type="button" data-action="inc" data-index="${index}">+</button>
+                  </div>
+                </div>
+                <div class="price">${(Number(item.price) || 0) * (Number(item.qty) || 1)} ر.س</div>
+              </div>
+            `;
+            cartList.appendChild(card);
+          });
+        }
+
+        cartList.addEventListener('click', (event) => {
+          const button = event.target.closest('button[data-action]');
+          if (!button) return;
+          const cart = readCart();
+          const index = Number(button.dataset.index);
+          const item = cart[index];
+          if (!item) return;
+          if (button.dataset.action === 'inc') {
+            item.qty = (Number(item.qty) || 1) + 1;
+          } else if (button.dataset.action === 'dec') {
+            const nextQty = (Number(item.qty) || 1) - 1;
+            if (nextQty <= 0) {
+              cart.splice(index, 1);
+            } else {
+              item.qty = nextQty;
+            }
+          }
+          writeCart(cart);
+        });
+
+        checkoutBtn.addEventListener('click', () => {
+          if (checkoutBtn.disabled) return;
+          checkoutBtn.disabled = true;
+          const previousText = checkoutBtn.textContent;
+          checkoutBtn.textContent = 'جارٍ المتابعة...';
+          if (statusText) statusText.textContent = orderWebhookUrl ? 'جارٍ حفظ ملخص الطلب بشكل آمن...' : '';
+          sendSafeOrderSummary()
+            .catch(() => false)
+            .finally(() => {
+              checkoutBtn.textContent = previousText;
+              checkoutBtn.disabled = false;
+              window.location.href = 'address.html';
+            });
+        });
+
+        render();
+      })();
+    </script>
+  </body>
+</html>

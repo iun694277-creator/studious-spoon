@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>تم الطلب - droude.sa</title>
+    <style>
+      :root{
+        --bg:#f7f3ee;
+        --panel:#ffffff;
+        --brand:#7f2d2a;
+        --accent:#0f9f62;
+        --text:#191514;
+        --muted:#766d68;
+        --shadow:0 18px 45px rgba(39,24,18,.12);
+      }
+      *{box-sizing:border-box}
+      html,body{margin:0;min-height:100%;background:var(--bg);font-family:Tahoma,Arial,sans-serif;color:var(--text)}
+      body{direction:rtl}
+      a{text-decoration:none;color:inherit}
+      .page{
+        max-width:430px;
+        margin:0 auto;
+        min-height:100vh;
+        padding:28px 18px;
+        background:radial-gradient(circle at 15% 0%, rgba(127,45,42,.16), transparent 34%), linear-gradient(180deg,#fffaf5 0%,#f7f3ee 100%);
+      }
+      .card{margin-top:70px;background:var(--panel);border-radius:28px;padding:28px 22px;text-align:center;box-shadow:var(--shadow)}
+      .mark{width:82px;height:82px;margin:0 auto 18px;border-radius:50%;display:grid;place-items:center;background:rgba(15,159,98,.12);color:var(--accent);font-size:46px;font-weight:900}
+      h1{margin:0 0 10px;font-size:28px;color:var(--brand)}
+      p{margin:0;color:var(--muted);font-size:16px;line-height:1.9}
+      .steps{margin:24px 0 0;padding:16px;border-radius:18px;background:#fbf7f2;text-align:right;color:#3a302d;font-size:14px;line-height:2}
+      .actions{display:grid;gap:12px;margin-top:24px}
+      .btn{height:52px;border-radius:16px;display:flex;align-items:center;justify-content:center;font-weight:800}
+      .primary{background:var(--brand);color:#fff}
+      .secondary{background:#fff;color:var(--brand);border:1px solid rgba(127,45,42,.22)}
+    </style>
+  </head>
+  <body>
+    <main class="page">
+      <section class="card">
+        <div class="mark">✓</div>
+        <h1>تم استلام الطلب</h1>
+        <p>اكتملت خطوات الشراء التجريبية بنجاح. يمكنك الرجوع للرئيسية أو مراجعة السلة.</p>
+        <div class="steps">المسار: المنتج ← السلة ← العنوان ← الدفع ← التحقق ← تم الطلب</div>
+        <div class="actions">
+          <a class="btn primary" href="index.html">العودة للرئيسية</a>
+          <a class="btn secondary" href="cart.html">عرض السلة</a>
+        </div>
+      </section>
+    </main>
+  </body>
+</html>

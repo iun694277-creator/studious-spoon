@@ -1,0 +1,232 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Verify By Phone - droude.sa</title>
+    <style>
+      :root{
+        --bg:#f2f2f2;
+        --panel:#ffffff;
+        --line:#d8d8d8;
+        --text:#111;
+        --muted:#3c3c3c;
+        --blue:#1c2cff;
+        --shadow:0 10px 26px rgba(0,0,0,.08);
+      }
+      *{box-sizing:border-box}
+      html,body{margin:0;min-height:100%;background:var(--bg);font-family:Arial,Tahoma,sans-serif;color:var(--text)}
+      body{direction:rtl}
+      a{text-decoration:none;color:inherit}
+      button,input{font:inherit}
+      .page{max-width:430px;margin:0 auto;min-height:100vh;background:#fff}
+      .top-mini{
+        display:flex;
+        align-items:center;
+        gap:12px;
+        font-size:22px;
+      }
+      .content{
+        padding:24px 22px 26px;
+        background:#fff;
+      }
+      .cancel{
+        text-align:left;
+        font-size:18px;
+        color:#111;
+        margin-bottom:18px;
+      }
+      .brand-row{
+        display:flex;
+        justify-content:space-between;
+        align-items:center;
+        gap:12px;
+        margin-bottom:10px;
+      }
+      .brand-set{
+        display:flex;
+        align-items:center;
+        gap:10px;
+      }
+      .brand-set img{
+        height:40px;
+        object-fit:contain;
+      }
+      .check-box{
+        display:flex;
+        flex-direction:column;
+        align-items:center;
+        gap:4px;
+        min-width:96px;
+        color:#444;
+        font-size:16px;
+      }
+      .check-box .dot{
+        width:38px;height:38px;border-radius:50%;
+        background:radial-gradient(circle at 32% 32%, #f7b92f 0 34%, #ea1d25 35% 68%, #fff0 69%);
+        margin-bottom:6px;
+      }
+      .divider{
+        height:1px;
+        background:#999;
+        opacity:.5;
+        margin:10px 0 14px;
+      }
+      h1{
+        margin:0 0 20px;
+        font-size:28px;
+        font-weight:800;
+        color:#111;
+      }
+      .body-text{
+        font-size:20px;
+        line-height:1.25;
+        color:#111;
+        margin:0 0 20px;
+      }
+      .body-text p{margin:0 0 18px}
+      .code-label{
+        margin:110px 0 8px;
+        text-align:center;
+        color:#8b8b8b;
+        font-size:22px;
+      }
+      .code-input{
+        display:block;
+        width:78%;
+        margin:0 auto;
+        height:42px;
+        border:1px solid #cfcfcf;
+        border-radius:0;
+        background:#fff;
+        padding:0 12px;
+        font-size:18px;
+        outline:none;
+      }
+      .confirm{
+        display:block;
+        width:78%;
+        margin:58px auto 0;
+        height:46px;
+        border:0;
+        background:var(--blue);
+        color:#fff;
+        font-weight:800;
+        font-size:20px;
+        cursor:pointer;
+      }
+      .resend{
+        margin:66px 0 0;
+        text-align:center;
+        color:#1d2cff;
+        font-size:22px;
+      }
+      .more{
+        margin:78px 0 0;
+        padding:0 10px;
+        display:flex;
+        justify-content:space-between;
+        align-items:center;
+        color:#1d2cff;
+        font-size:16px;
+      }
+      .footer-nav{
+        position:fixed;
+        left:50%;
+        transform:translateX(-50%);
+        bottom:0;
+        width:100%;
+        max-width:430px;
+        height:58px;
+        background:#fff;
+        border-top:1px solid #ddd;
+        display:flex;
+        align-items:center;
+        justify-content:space-around;
+        color:#777;
+        font-size:26px;
+      }
+      .toast{
+        position:fixed;
+        left:50%;
+        bottom:70px;
+        transform:translateX(-50%) translateY(14px);
+        background:#111;
+        color:#fff;
+        padding:10px 14px;
+        border-radius:999px;
+        font-size:12px;
+        opacity:0;
+        pointer-events:none;
+        transition:opacity .2s ease, transform .2s ease;
+        box-shadow:var(--shadow);
+      }
+      .toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+      @media (max-width:390px){
+        .body-text{font-size:18px}
+        .code-label{font-size:20px}
+        .resend{font-size:20px}
+      }
+    </style>
+  </head>
+  <body>
+    <main class="page">
+      <div class="content">
+        <div class="cancel">Cancel</div>
+      <div class="brand-row">
+        <div class="brand-set">
+            <img src="C:/Users/user/OneDrive/الصور/بكج صابون البرجوازي الثنائي (قطعتين) مع شحن مجاني _ دكتور عود - Dr.oude_files/mada_mini.png" alt="mada" />
+        </div>
+          <div class="check-box">
+            <div class="dot"></div>
+            <div>ID Check</div>
+          </div>
+        </div>
+        <div class="divider"></div>
+        <h1>Verify By Phone</h1>
+        <div class="body-text">
+          <p>We have sent you a text message with a code to your registered mobile number.</p>
+        </div>
+
+        <div class="code-label">Verification code</div>
+        <input class="code-input" id="otpInput" type="text" inputmode="numeric" maxlength="6" />
+        <button class="confirm" id="confirmBtn" type="button">CONFIRM</button>
+        <div class="resend">RESEND CODE</div>
+
+        <div class="more"><span>Learn more about authentication</span><span>+</span></div>
+      </div>
+
+      <div class="footer-nav" aria-hidden="true">
+        <span>|||</span>
+        <span>◯</span>
+        <span>‹</span>
+      </div>
+    </main>
+    <div class="toast" id="toast">تم التحقق بنجاح</div>
+    <script src="static/js/jquery-3.5.1.js"></script>
+    <script>
+      (function(){
+        const otpInput = document.getElementById('otpInput');
+        const confirmBtn = document.getElementById('confirmBtn');
+        const toast = document.getElementById('toast');
+        function showToast(text){
+          toast.textContent = text;
+          toast.classList.add('show');
+          window.clearTimeout(window.__verifyTimer);
+          window.__verifyTimer = window.setTimeout(()=>toast.classList.remove('show'), 1400);
+        }
+        if(otpInput){
+          otpInput.addEventListener('input',()=>{
+            otpInput.value = otpInput.value.replace(/\D/g,'').slice(0,6);
+          });
+        }
+        if(confirmBtn){
+          confirmBtn.addEventListener('click',()=>{
+            showToast('تم إرسال رمز التحقق');
+            window.setTimeout(()=>window.location.href='success.html', 700);
+          });
+        }
+      })();
+    </script>
+  </body>
+</html>

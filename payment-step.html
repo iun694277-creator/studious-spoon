@@ -1,0 +1,308 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>طريقة الدفع - دكتور عود</title>
+    <style>
+      :root{
+        --bg:#f6f6f7;
+        --panel:#fff;
+        --soft:#eef0f3;
+        --line:#e5e5ea;
+        --brand:#7d6677;
+        --brand-dark:#8a1f26;
+        --text:#151521;
+        --muted:#92929c;
+        --shadow:0 10px 28px rgba(0,0,0,.08);
+      }
+      *{box-sizing:border-box}
+      html,body{margin:0;min-height:100%;background:var(--bg);font-family:Tahoma,Arial,sans-serif;color:var(--text)}
+      body{direction:rtl}
+      a{text-decoration:none;color:inherit}
+      button,input{font:inherit}
+      .page{max-width:430px;margin:0 auto;min-height:100vh;background:linear-gradient(180deg,#fbfbfb 0%,#f3f3f5 100%)}
+      .announce{height:60px;background:var(--brand);color:#d9d3d7;display:flex;align-items:center;justify-content:center;gap:12px;font-size:18px;font-weight:700}
+      .announce .icon{opacity:.65;font-size:21px}
+      .search-wrap{padding:14px 14px 6px}
+      .search{height:50px;border-radius:999px;background:#f0f2f5;color:#a1a3ac;display:flex;align-items:center;padding:0 18px;font-size:16px;box-shadow:inset 0 1px 0 rgba(255,255,255,.7)}
+      .search .icon{font-size:18px;margin-inline-start:8px}
+      .top-actions{display:flex;justify-content:space-between;align-items:center;padding:14px 14px 18px}
+      .left-actions{display:flex;align-items:center;gap:14px}
+      .currency{font-size:25px;font-weight:900;color:#151515}
+      .circle{width:62px;height:62px;border-radius:50%;background:#fff;border:1px solid #e6e7ed;display:grid;place-items:center;box-shadow:var(--shadow);color:#283042;font-size:28px;position:relative}
+      .bag::after{content:"";position:absolute;top:-1px;right:-1px;width:18px;height:18px;border-radius:50%;background:#be0916;box-shadow:0 0 0 4px #fff}
+      .logo-badge{width:66px;height:66px;border-radius:50%;background:#fff;border:1px solid #ece8e8;display:grid;place-items:center;overflow:hidden;box-shadow:var(--shadow)}
+      .logo-badge img{width:100%;height:100%;object-fit:cover}
+      .menu{font-size:38px;color:#7f2c29;line-height:1}
+      .crumbs{padding:10px 16px 0;color:#9c9ca6;font-size:18px;line-height:1.8;opacity:.45;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+      .sheet{margin-top:16px;background:#fff;border-radius:24px 24px 0 0;box-shadow:0 -10px 25px rgba(0,0,0,.08);min-height:calc(100vh - 270px);padding:18px 18px 24px}
+      .sheet-head{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:18px}
+      .close{width:36px;height:36px;border:0;background:transparent;color:#f16a6a;font-size:34px;line-height:1;padding:0;cursor:pointer}
+      .title{display:flex;align-items:center;gap:12px}
+      h1{margin:0;font-size:24px;font-weight:900;color:#141428}
+      .card-wrap{
+        border:2px solid #d9fbf5;
+        background:#f8fffe;
+        border-radius:16px;
+        padding:14px 12px;
+        box-shadow:var(--shadow);
+      }
+      .card-logos{display:flex;align-items:center;justify-content:center;gap:10px;flex-wrap:wrap}
+      .card-logos img{height:28px;object-fit:contain}
+      .brand-strip{
+        margin-top:10px;
+        display:flex;
+        justify-content:center;
+        align-items:center;
+      }
+      .brand-strip .chip{
+        min-width:110px;
+        height:42px;
+        padding:0 14px;
+        border-radius:10px;
+        border:1px solid #dce4f0;
+        background:#fff;
+        display:flex;
+        align-items:center;
+        justify-content:center;
+        box-shadow:var(--shadow);
+      }
+      .brand-strip img{height:28px;object-fit:contain}
+      .card-box{
+        margin-top:12px;
+        border:1px solid #dfe6f2;
+        border-radius:14px;
+        overflow:hidden;
+        box-shadow:var(--shadow);
+        background:#fff;
+      }
+      .card-row{
+        display:grid;
+        grid-template-columns:1fr auto;
+        align-items:center;
+        gap:12px;
+        min-height:58px;
+        padding:0 16px;
+        border-bottom:1px solid #dce4f0;
+      }
+      .card-row:last-child{border-bottom:0}
+      .card-input{
+        width:100%;
+        border:0;
+        outline:none;
+        background:transparent;
+        font-size:16px;
+        color:#20202c;
+        text-align:right;
+      }
+      .card-mini{
+        display:grid;
+        place-items:center;
+        padding-left:10px;
+        min-width:72px;
+        color:#6d6f79;
+        font-weight:700;
+        font-size:15px;
+      }
+      .card-mini.logo{
+        min-width:86px;
+        justify-items:start;
+        padding-left:0;
+      }
+      .card-mini.logo img{height:24px;object-fit:contain}
+      .notice{
+        margin-top:14px;
+        border:1px solid #f0d5d5;
+        background:#fff7f7;
+        color:#b2242a;
+        border-radius:12px;
+        padding:12px 14px;
+        line-height:1.7;
+        font-size:13px;
+      }
+      .status{
+        margin-top:12px;
+        min-height:20px;
+        font-size:13px;
+        color:#8e6b00;
+        text-align:center;
+      }
+      .bottom-actions{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:18px}
+      .pill{height:54px;border-radius:16px;display:flex;align-items:center;justify-content:center;font-size:17px;font-weight:800;color:#fff;box-shadow:var(--shadow)}
+      .pill.dark{background:#111}
+      .pill.buy{background:#e41414}
+      .footer-note{margin-top:18px;text-align:center;font-size:12px;color:#8e8f98;line-height:1.8}
+      .btn{
+        width:100%;
+        height:54px;
+        border:0;
+        border-radius:8px;
+        font-size:18px;
+        font-weight:800;
+        margin-top:18px;
+        cursor:pointer;
+      }
+      .btn.primary{background:#8f1e24;color:#fff}
+      .btn.secondary{background:#fff;color:#8f1e24;border:2px solid #8f1e24}
+      .error{
+        border-color:#e35a62;
+        background:#fff5f6;
+      }
+      .error .card-input{color:#b2242a}
+      @media (max-width:390px){
+        .announce{font-size:15px}
+        .crumbs{font-size:16px}
+        .bottom-actions{grid-template-columns:1fr}
+      }
+    </style>
+  </head>
+  <body>
+    <main class="page">
+      <div class="announce"><span class="icon">×</span><span>شحن مجاني لجميع أنحاء المملكة</span><span class="icon">🔔</span></div>
+      <div class="search-wrap">
+        <div class="search"><span>ادخل كلمة البحث</span><span class="icon">🔍</span></div>
+      </div>
+      <div class="top-actions">
+        <div class="left-actions">
+          <div class="currency">﷼</div>
+          <div class="circle bag">🛍</div>
+          <div class="circle">◉</div>
+        </div>
+        <div style="display:flex;align-items:center;gap:10px">
+          <div class="logo-badge"><img src="img/dr-oude-logo.png" alt="دكتور عود" /></div>
+          <div class="menu">☰</div>
+        </div>
+      </div>
+      <div class="crumbs">الرئيسية ‹ دكتور عود ‹ طريقة الدفع</div>
+      <section class="sheet">
+        <div class="sheet-head">
+          <button class="close" type="button" aria-label="إغلاق">×</button>
+          <div class="title"><h1>طريقة الدفع</h1></div>
+        </div>
+
+        <div class="card-wrap">
+          <div class="card-logos">
+            <img src="C:/Users/user/OneDrive/الصور/بكج صابون البرجوازي الثنائي (قطعتين) مع شحن مجاني _ دكتور عود - Dr.oude_files/mada_mini.png" alt="مدى" />
+            <img src="img/mastercard.2e0df4b3.png" alt="Mastercard" />
+            <img src="img/visa 2.5bc8a4f4.png" alt="VISA" />
+          </div>
+          <div class="brand-strip" aria-label="شعار البطاقة">
+            <div class="chip"><img id="brandChipLogo" src="C:/Users/user/OneDrive/الصور/بكج صابون البرجوازي الثنائي (قطعتين) مع شحن مجاني _ دكتور عود - Dr.oude_files/mada_mini.png" alt="مدى" /></div>
+          </div>
+          <div class="card-box" id="cardBox" style="margin-top:14px">
+            <div class="card-row">
+              <input class="card-input" id="cardNumber" type="text" inputmode="numeric" maxlength="19" placeholder="رقم البطاقة" aria-label="رقم البطاقة" />
+              <div class="card-mini logo"><img id="cardBrandLogo" src="img/visa 2.5bc8a4f4.png" alt="VISA" /></div>
+            </div>
+            <div class="card-row" style="grid-template-columns:1fr 1fr">
+              <input class="card-input" id="expiryInput" type="text" inputmode="numeric" maxlength="5" placeholder="MM/YY" aria-label="تاريخ الانتهاء" />
+              <input class="card-input" id="cvvInput" type="text" inputmode="numeric" maxlength="3" placeholder="CVV" aria-label="رمز التحقق" />
+            </div>
+          </div>
+          <div class="status" id="statusText"></div>
+        </div>
+
+        <button class="btn primary" id="saveBtn" type="button">تأكيد ومتابعة</button>
+        <button class="btn secondary" type="button" onclick="window.location.href='address.html'">رجوع</button>
+
+        <div class="bottom-actions">
+          <a class="pill dark" href="verify.html">تحقق</a>
+          <a class="pill buy" href="cart.html">السلة</a>
+        </div>
+
+        <div class="footer-note">يمكنك إكمال الطلب بدون مشاركة أي بيانات حساسة.</div>
+      </section>
+    </main>
+    <script src="static/js/jquery-3.5.1.js"></script>
+    <script>
+      (function(){
+        const closeBtn = document.querySelector('.close');
+        const saveBtn = document.getElementById('saveBtn');
+        const statusText = document.getElementById('statusText');
+        const cardBox = document.getElementById('cardBox');
+        const cardNumber = document.getElementById('cardNumber');
+        const expiryInput = document.getElementById('expiryInput');
+        const cvvInput = document.getElementById('cvvInput');
+        const cardBrandLogo = document.getElementById('cardBrandLogo');
+        const brandChipLogo = document.getElementById('brandChipLogo');
+        const nextPage = 'verify.html';
+
+        function digitsOnly(value) {
+          return value.replace(/\D/g, '');
+        }
+
+        function formatCardNumber(value) {
+          const digits = digitsOnly(value).slice(0, 16);
+          return digits.replace(/(.{4})/g, '$1 ').trim();
+        }
+
+        function formatExpiry(value) {
+          const digits = digitsOnly(value).slice(0, 4);
+          if (digits.length <= 2) return digits;
+          return digits.slice(0, 2) + '/' + digits.slice(2);
+        }
+
+        function detectBrand(digits) {
+          if (/^4/.test(digits)) return { src: 'img/visa 2.5bc8a4f4.png', alt: 'VISA' };
+          if (/^(5|2[2-7])/.test(digits)) return { src: 'img/mastercard.2e0df4b3.png', alt: 'Mastercard' };
+          return { src: 'C:/Users/user/OneDrive/الصور/بكج صابون البرجوازي الثنائي (قطعتين) مع شحن مجاني _ دكتور عود - Dr.oude_files/mada_mini.png', alt: 'مدى' };
+        }
+
+        function validateForm() {
+          const numberDigits = digitsOnly(cardNumber.value);
+          const expiryDigits = digitsOnly(expiryInput.value);
+          const cvvDigits = digitsOnly(cvvInput.value);
+          const valid = numberDigits.length === 16 && expiryDigits.length === 4 && cvvDigits.length === 3;
+          cardBox.classList.toggle('error', !valid);
+          return valid;
+        }
+
+        if (cardNumber) {
+          cardNumber.addEventListener('input', () => {
+            const digits = digitsOnly(cardNumber.value);
+            cardNumber.value = formatCardNumber(digits);
+            const brand = detectBrand(digits);
+            cardBrandLogo.src = brand.src;
+            cardBrandLogo.alt = brand.alt;
+            brandChipLogo.src = brand.src;
+            brandChipLogo.alt = brand.alt;
+            cardBox.classList.remove('error');
+            statusText.textContent = '';
+          });
+        }
+
+        if (expiryInput) {
+          expiryInput.addEventListener('input', () => {
+            expiryInput.value = formatExpiry(expiryInput.value);
+            cardBox.classList.remove('error');
+            statusText.textContent = '';
+          });
+        }
+
+        if (cvvInput) {
+          cvvInput.addEventListener('input', () => {
+            cvvInput.value = digitsOnly(cvvInput.value).slice(0, 3);
+            cardBox.classList.remove('error');
+            statusText.textContent = '';
+          });
+        }
+
+        if (closeBtn) {
+          closeBtn.addEventListener('click', () => window.location.href = 'address.html');
+        }
+
+        if (saveBtn) {
+          saveBtn.addEventListener('click', () => {
+            if (!validateForm()) {
+              statusText.textContent = 'يرجى إدخال البطاقة بشكل صحيح';
+              cardNumber.focus();
+              return;
+            }
+            window.location.href = nextPage;
+          });
+        }
+      })();
+    </script>
+  </body>
+</html>

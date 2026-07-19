@@ -1,0 +1,4 @@
+{
+  "ORDERS_ENDPOINT": "http://127.0.0.1:3001/orders",
+  "TELEGRAM_MODE": "optional-server-env-only"
+}
