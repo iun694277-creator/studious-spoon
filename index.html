@@ -636,7 +636,7 @@
         <div class="curr">ر.س</div>
       </div>
     </section>
-    <div class="cta-row"><a class="cta-buy" href="cart.html">اشتري الآن</a><button class="cta-cart"
+    <div class="cta-row"><a class="cta-buy" href="typeofpayment.html">اشتري الآن</a><button class="cta-cart"
         id="addToCartBtn" type="button">أضف إلى السلة</button></div>
     <div class="pill-list"><span class="pill">الدفع عند الاستلام متاح</span><span class="pill">شحن مجاني</span><span
         class="pill">إرجاع مرن</span></div>
@@ -730,9 +730,7 @@
     </footer>
   </main>
   <div class="toast" id="toast">تمت إضافة المنتج إلى السلة</div>
-  <script src="static/js/jquery-3.5.1.js"></script>
   <script>
-    window.ORDER_WEBHOOK_URL = 'http://127.0.0.1:3001/orders';
     (function () {
       const cartKey = 'droude_cart';
       const toast = document.getElementById('toast');
@@ -774,34 +772,6 @@
         }, 1600);
       }
 
-      async function sendSafeProductNotice(cart) {
-        const orderWebhookUrl = window.ORDER_WEBHOOK_URL || '';
-        if (!orderWebhookUrl) return true;
-        const totalQty = cart.reduce((sum, item) => sum + (Number(item.qty) || 1), 0);
-        const subtotal = cart.reduce((sum, item) => sum + ((Number(item.price) || 0) * (Number(item.qty) || 1)), 0);
-        const response = await fetch(orderWebhookUrl, {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({
-            source: 'product',
-            event: 'add_to_cart',
-            orderId: 'DR-' + Date.now().toString(36).toUpperCase(),
-            totalQty,
-            subtotal,
-            currency: 'SAR',
-            items: cart.map((item) => ({
-              id: item.id,
-              name: item.name,
-              qty: Number(item.qty) || 1,
-              price: Number(item.price) || 0,
-            })),
-          }),
-        });
-        return response.ok;
-      }
-
       function addPackageToCart() {
         const cart = readCart();
         const existingItem = cart.find((item) => item.id === packageItem.id);
@@ -812,13 +782,9 @@
         }
         writeCart(cart);
         showToast('تمت إضافة الباكيج إلى السلة');
-        sendSafeProductNotice(cart)
-          .catch(() => false)
-          .finally(() => {
-            window.setTimeout(() => {
-              window.location.href = 'cart.html';
-            }, 350);
-          });
+        window.setTimeout(() => {
+          window.location.href = 'cart.html';
+        }, 350);
       }
 
       const existing = readCart();
